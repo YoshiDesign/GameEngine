@@ -1,14 +1,11 @@
 #include "src/graphics/window.h"
-
-//void cursor_pos_callback()
-//{
-//	std::cout << ""
-//}
+#include "src/maths/maths.h"
 
 int main()
 {
 	using namespace sparx;
 	using namespace graphics;
+	using namespace maths;
 
 	Window window("Sparx!", 960, 540);
 	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
@@ -17,19 +14,14 @@ int main()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
+	vec2 e(1.0f, 2.0f);
+	vec2 f(1.5f, 2.0f);
+	e *= f;
+	
 	while (!window.closed())
 	{
-
 		window.clear();
-		double x, y;
-		window.getMousePosition(x, y);
-		std::cout << x << ", " << y << std::endl;
-
-
-		if (window.isMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT))
-		{
-			std::cout << "PRESSED" << std::endl;
-		}
+		std::cout << (e != f) << std::endl;
 #if 1
 		glBegin(GL_TRIANGLES);
 		glVertex2f(-0.5f, -0.5f);

@@ -2,9 +2,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-namespace sparx {
-
-	namespace graphics {
+namespace sparx { namespace graphics {
 #define MAX_KEYS	1024
 #define MAX_BUTTONS 32
 		class Window
@@ -42,8 +40,4 @@ namespace sparx {
 			friend static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 		};
 		
-	}
-
-
-
-}
+} }
