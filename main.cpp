@@ -7,8 +7,8 @@ int main()
 	using namespace graphics;
 	using namespace maths;
 
-	Window window("Sparx!", 960, 540);
 	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
+	Window window("Sparx!", 960, 540);
 
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
@@ -21,7 +21,7 @@ int main()
 	while (!window.closed())
 	{
 		window.clear();
-		std::cout << (e != f) << std::endl;
+
 #if 1
 		glBegin(GL_TRIANGLES);
 		glVertex2f(-0.5f, -0.5f);
