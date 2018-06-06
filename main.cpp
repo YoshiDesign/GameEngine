@@ -10,7 +10,7 @@ int main()
 	using namespace maths;
 
 	Window window("Sparx!", 960, 540);
-	glClearColor(0.0f, 1.0f, 0.1f, 1.0f);
+	/*glClearColor(1.0f, 1.0f, 1.0f, 1.0f);*/
 
 	GLfloat vertices[] =
 	{
@@ -19,10 +19,7 @@ int main()
 		0,3,0,
 		0,3,0,
 		8,3,0,
-		8,0,0,
-		
-		
-				
+		8,0,0,	
 	};
 
 	GLuint vbo;
@@ -39,8 +36,10 @@ int main()
 	shader.setUniformMat4("pr_matrix", ortho);
 	shader.setUniformMat4("ml_matrix", mat4::translation(vec3(4,3,0)));
 
-	
+	shader.setUniform2f("light_pos", vec2(4.0f, 1.5f));
+	shader.setUniform4f("color_u", vec4(0.2f, 0.3f, 0.8f, 1.0f));
 
+	
 	while (!window.closed())
 	{
 		window.clear();
