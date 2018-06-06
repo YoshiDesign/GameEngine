@@ -7,17 +7,13 @@ int main()
 	using namespace graphics;
 	using namespace maths;
 
-	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
+	glClearColor(0.2f, 0.5f, 0.1f, 0.4f);
 	Window window("Sparx!", 960, 540);
 
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	vec2 e(1.0f, 2.0f);
-	vec2 f(1.5f, 2.0f);
-	e *= f;
-	
 	while (!window.closed())
 	{
 		window.clear();

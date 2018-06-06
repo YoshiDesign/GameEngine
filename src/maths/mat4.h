@@ -1,14 +1,21 @@
 #pragma once
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include "maths.h"
+
+#include "vec3.h"
+#include "vec4.h"
+#include "extra_maths.h"
+
 
 namespace sparx { namespace maths {
 	
 	// Struct cuz public innards
 	struct mat4
 	{
-		float elements[4 * 4];
+		union
+		{
+			float elements[4 * 4];
+			vec4 columns[4];
+		};
+		
 
 		mat4();
 		mat4(float diagonal);

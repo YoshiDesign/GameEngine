@@ -1,4 +1,4 @@
-#include "mat4.h"
+#include "maths.h"
 
 namespace sparx { namespace maths {
 
@@ -42,6 +42,8 @@ namespace sparx { namespace maths {
 				elements[x + y * 4] = sum;
 			}
 		}
+
+		return *this;
 	}
 
 	mat4 operator*(mat4 left, const mat4& right)
@@ -86,6 +88,7 @@ namespace sparx { namespace maths {
 
 		return c;
 	}
+
 	mat4 mat4::translation(const vec3& translation)
 	{
 		mat4 result(1.0f);
@@ -97,15 +100,43 @@ namespace sparx { namespace maths {
 		return result;
 	}
 
-	mat4 mat4::scale(const vec3& scale)
+	mat4 mat4::rotation(float angle, const vec3& axis)
 	{
-		// quite similar to translation in a way or 2
-
 		mat4 result(1.0f);
 
-		result.elements[0 + 3 * 4] = scale.x;
-		result.elements[1 + 3 * 4] = scale.y;
-		result.elements[2 + 3 * 4] = scale.z;
+		float r = toRadians(angle);
+		float c = cos(r);
+		float s = sin(r);
+		float omc = 1.0f - c;	// 1 - c
+
+		// Compiler will opt. this
+		float x = axis.x;
+		float y = axis.y;
+		float z = axis.z;
+
+		result.elements[0 + 0 * 4] = x * omc + c;
+		result.elements[1 + 0 * 4] = y * x * omc + z * s;
+		result.elements[2 + 0 * 4] = x * z * omc - y * s;
+
+		result.elements[0 + 1 * 4] = x * y * omc - z * s;
+		result.elements[1 + 1 * 4] = y * omc + c;
+		result.elements[2 + 1 * 4] = y * z * omc + x * s;
+
+		result.elements[0 + 2 * 4] = x * z * omc + y * s;
+		result.elements[1 + 2 * 4] = y * z * omc - x * s;
+		result.elements[2 + 2 * 4] = z * omc + c;
+
+		return result;
+	}
+
+	mat4 mat4::scale(const vec3& scale)
+	{
+		// 
+		mat4 result(1.0f);
+
+		result.elements[0 + 0 * 4] = scale.x;
+		result.elements[1 + 1 * 4] = scale.y;
+		result.elements[2 + 2 * 4] = scale.z;
 
 		return result;
 

@@ -5,11 +5,11 @@
 
 namespace sparx { namespace maths {
 
-	struct vec4		// Name Matching GLSL convention. Use of friend is arbitrary reassurance
+	struct vec4		// Case matches GLSL convention. Use of friend is arbitrary reassurance
 	{
 		float x, y, z, w;
 
-		vec4();
+		vec4() = default;	// Irrelevant to >= C++17. Fixes Union Error
 		vec4(const float& x, const float& y, const float& z, const float& w);
 		
 		// These return a reference to current vec4 object lol?
