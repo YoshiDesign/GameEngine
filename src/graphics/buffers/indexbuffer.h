@@ -3,8 +3,9 @@
 
 #include <GL/glew.h>
 
+// Similar to buffer.h but uses GL_ELEMENT_ARRAY_BUFFER in order to access indices
 namespace sparx { namespace graphics {
-		// Add a bunch of data to a buffer, and generate an OpenGL buffer
+	// Generate and bind to OpenGL buffer with our data
 	class IndexBuffer
 	{
 	private:
@@ -17,7 +18,7 @@ namespace sparx { namespace graphics {
 		void bind() const;
 		void unbind() const;
 
-		GLuint getCount() const { return m_Count; }
+		inline GLuint getCount() const { return m_Count; }
 
 	};
 

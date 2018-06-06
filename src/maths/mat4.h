@@ -26,7 +26,6 @@ namespace sparx { namespace maths {
 			return vec4(elements[index], elements[index + 1], elements[index + 2], elements[index + 3]);
 		}
 
-
 		static mat4 identity();
 		mat4& multiply(const mat4& other); // Multiplies the current matrix by arg. Returns the current matrix. No copies
 

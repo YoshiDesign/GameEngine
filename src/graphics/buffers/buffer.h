@@ -16,7 +16,7 @@ namespace sparx { namespace graphics {
 		void bind() const;
 		void unbind() const;
 
-		GLuint getComponentCount() const { return m_ComponentCount; }
+		inline GLuint getComponentCount() const { return m_ComponentCount; }
 
 	};
 
