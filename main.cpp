@@ -1,5 +1,7 @@
 #include "src/graphics/window.h"
+#include "src/graphics/shader.h"
 #include "src/maths/maths.h"
+#include "src/utils/fileutils.h"
 
 int main()
 {
@@ -8,36 +10,35 @@ int main()
 	using namespace maths;
 
 	Window window("Sparx!", 960, 540);
-	glClearColor(0.2f, 0.2f, 0.1f, 1.0f);
+	glClearColor(0.0f, 1.0f, 0.1f, 1.0f);
 
-	GLuint vao;
+	GLfloat vertices[] =
+	{
+		-0.5f, -0.5f,  0.0f, 
+		-0.5f,  0.5f,  0.0f,
+		 0.5f,  0.5f,  0.0f,
+		 0.5f,  0.5f,  0.0f,
+		 0.5f, -0.5f,  0.0f,
+		-0.5f, -0.5f,  0.0f
+	};
+
+	GLuint vao, vbo;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-
-	mat4 position = mat4::translation(vec3(2, 3, 4));
-	position *= mat4::identity();
-
-	position.elements[12] = 2.0f;
-
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);	// False = normalized // 3 because there are 3 components to each vertex (above vertices)
+	glEnableVertexAttribArray(0);
 	
-
-	std::cout << &position.elements[12] << std::endl;
-	std::cout << &position.columns[3].x << std::endl;
-
+	Shader shader("src/shaders/basic.frag", "src/shaders/basic.vert");
+	shader.enable();
 
 	while (!window.closed())
 	{
 		window.clear();
 
-#if 1
-		glBegin(GL_TRIANGLES);
-		glVertex2f(-0.5f, -0.5f);
-		glVertex2f( 0.0f,  0.5f);
-		glVertex2f( 0.5f, -0.5f);
-		glEnd();
-#else
-		glDrawArrays(GL_ARRAY_BUFFER, 0, 6);
-#endif
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		window.update();
 	}

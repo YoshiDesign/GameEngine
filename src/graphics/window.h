@@ -1,7 +1,8 @@
 #pragma once
+#include <iostream>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 namespace sparx { namespace graphics {
 #define MAX_KEYS	1024
 #define MAX_BUTTONS 32
