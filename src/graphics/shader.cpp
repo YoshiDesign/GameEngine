@@ -2,7 +2,7 @@
 
 namespace sparx { namespace graphics {
 	
-	Shader::Shader(const char* fragPath, const char* vertPath)
+	Shader::Shader(const char* vertPath, const char* fragPath)
 		: m_VertPath(vertPath), m_FragPath(fragPath)
 	{
 		m_ShaderID = load();

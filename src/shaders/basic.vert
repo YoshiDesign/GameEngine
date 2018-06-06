@@ -8,5 +8,5 @@ uniform mat4 m1_matrix = mat4(1.0);
 
 void main()
 {
-	gl_Position = position;
+	gl_Position = pr_matrix * position;
 }

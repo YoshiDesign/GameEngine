@@ -14,25 +14,23 @@ int main()
 
 	GLfloat vertices[] =
 	{
-		-0.5f, -0.5f,  0.0f, 
-		-0.5f,  0.5f,  0.0f,
-		 0.5f,  0.5f,  0.0f,
-		 0.5f,  0.5f,  0.0f,
-		 0.5f, -0.5f,  0.0f,
-		-0.5f, -0.5f,  0.0f
+		0, 0, 10,
+		15, 0, 0,
+		0, 15, 0		
 	};
 
-	GLuint vao, vbo;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
+	GLuint vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);	// False = normalized // 3 because there are 3 components to each vertex (above vertices)
 	glEnableVertexAttribArray(0);
 	
-	Shader shader("src/shaders/basic.frag", "src/shaders/basic.vert");
+	mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
+
+	Shader shader("src/shaders/basic.vert", "src/shaders/basic.frag");
 	shader.enable();
+	glUniformMatrix4fv(glGetUniformLocation(shader.m_ShaderID, "pr_matrix"), 1, GL_FALSE, ortho.elements);
 
 	while (!window.closed())
 	{

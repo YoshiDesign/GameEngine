@@ -12,11 +12,11 @@ namespace sparx { namespace graphics {
 
 		class Shader
 		{
-		private:
+		public:
 			GLuint m_ShaderID;
 			const char *m_VertPath, *m_FragPath;					// helpful for debug
 		public:
-			Shader(const char* fragPath, const char* vertPath ); // path to vertex shader and fragment shader
+			Shader(const char* vertPath, const char* fragPath); // path to vertex shader and fragment shader
 			~Shader();
 
 			void enable() const;
