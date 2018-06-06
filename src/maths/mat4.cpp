@@ -10,16 +10,17 @@ namespace sparx { namespace maths {
 
 	mat4::mat4(float diagonal)
 	{
-
+		// memset 0
 		for (int i = 0; i < 4 * 4; i++)
 			elements[i] = 0.0f;
+
 		elements[0 + 0 * 4] = diagonal;
 		elements[1 + 1 * 4] = diagonal;
 		elements[2 + 2 * 4] = diagonal;
 		elements[3 + 3 * 4] = diagonal;
 	}
 
-	mat4 mat4::identity()
+	mat4 mat4::identity()	// calls above func
 	{
 		return mat4(1.0f);
 	}
@@ -42,7 +43,6 @@ namespace sparx { namespace maths {
 				elements[x + y * 4] = sum;
 			}
 		}
-
 		return *this;
 	}
 
@@ -86,7 +86,7 @@ namespace sparx { namespace maths {
 		result.elements[3 + 2 * 4] = -1.0f;
 		result.elements[2 + 3 * 4] = c;
 
-		return c;
+		return result;
 	}
 
 	mat4 mat4::translation(const vec3& translation)
@@ -141,5 +141,4 @@ namespace sparx { namespace maths {
 		return result;
 
 	}
-
 } }

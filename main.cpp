@@ -7,12 +7,23 @@ int main()
 	using namespace graphics;
 	using namespace maths;
 
-	glClearColor(0.2f, 0.5f, 0.1f, 0.4f);
 	Window window("Sparx!", 960, 540);
+	glClearColor(0.2f, 0.2f, 0.1f, 1.0f);
 
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
+
+	mat4 position = mat4::translation(vec3(2, 3, 4));
+	position *= mat4::identity();
+
+	position.elements[12] = 2.0f;
+
+	
+
+	std::cout << &position.elements[12] << std::endl;
+	std::cout << &position.columns[3].x << std::endl;
+
 
 	while (!window.closed())
 	{
