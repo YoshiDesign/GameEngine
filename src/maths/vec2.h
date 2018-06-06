@@ -3,8 +3,7 @@
 
 // + and << are overloaded in vec2
 
-namespace sparx {
-	namespace maths {
+namespace sparx { namespace maths {
 
 		struct vec2		// Using a struct because everything will be public from here. Name Matching GLSL convention
 		{
@@ -19,14 +18,13 @@ namespace sparx {
 			vec2& multiply(const vec2& other);
 			vec2& divide(const vec2& other);
 
-			// reading from right, hence ref
+			// reading from right, hence ref. Or a = x + b would alter x
 			friend vec2 operator+(vec2 left, const vec2& right);
 			friend vec2 operator-(vec2 left, const vec2& right);
 			friend vec2 operator*(vec2 left, const vec2& right);
 			friend vec2 operator/(vec2 left, const vec2& right);
 
-			// override comparison
-			
+			// oveload comparisons
 			bool operator!=(const vec2& other);
 			bool operator==(const vec2& other);
 
@@ -40,10 +38,6 @@ namespace sparx {
 			friend std::ostream& operator<<(std::ostream& stream, const vec2& vector);
 		};
 
-
 		// Lets make an output string operator
 
-
-
-	}
-}
+} }

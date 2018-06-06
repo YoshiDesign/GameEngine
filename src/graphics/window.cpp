@@ -1,8 +1,6 @@
 #include "window.h"
 
-namespace sparx {
-
-	namespace graphics {
+namespace sparx { namespace graphics {
 
 		void window_resize(GLFWwindow *window, int width, int height);
 

@@ -1,8 +1,7 @@
 #include "vec2.h"
 
 
-namespace sparx {
-	namespace maths {
+namespace sparx { namespace maths {
 
 		// empty constructor
 		vec2::vec2()
@@ -103,5 +102,4 @@ namespace sparx {
 			return stream;
 		}
 
-	}
-}
+} }
