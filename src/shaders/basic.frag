@@ -11,5 +11,4 @@ void main()
 {
 	float intensity = 1.0 / length(pos.xy - light_pos);
 	color = color_u * intensity;
-
 }

@@ -23,55 +23,78 @@ namespace sparx { namespace graphics {
 		std::string vertSourceString = FileUtils::read_file(m_VertPath);
 		std::string fragSourceString = FileUtils::read_file(m_FragPath);
 
-		const char *vertSource = vertSourceString.c_str();	// Boiler-plating
+		const char *vertSource = vertSourceString.c_str();					// The shader source codes
 		const char *fragSource = fragSourceString.c_str();
 
-		glShaderSource(vertex, 1, &vertSource, NULL);			// Designate shader to be compiled
-		glCompileShader(vertex);
+		glShaderSource(vertex, 1, &vertSource, NULL);						// These functions remove any existing strings from specified buffer (vertex, here)
+		glCompileShader(vertex);											// Compile vert
 
-		GLint result;											// Get the vertex error log
+		GLint result;														// ERROR_STATUS
 
-		glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
+		glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);					// Set result to COMPILE_STATUS
+		// Check 1 vectorshader
 		if (result == GL_FALSE)
 		{
 			GLint length;
 			glGetShaderiv(vertex, GL_INFO_LOG_LENGTH, &length);
+
 			std::vector<char> error(length);
 			glGetShaderInfoLog(vertex, length, &length, &error[0]);
 			std::cout << "Failed to compile Vertex Shader" << std::endl << &error[0] << std::endl;
+
 			glDeleteShader(vertex);
-			return 0;											// Uint...
+			return 0;														// Should always return uint
 		}
 
-		glShaderSource(fragment, 1, &fragSource, NULL);			// Designate shader to be compiled
+		glShaderSource(fragment, 1, &fragSource, NULL);						// Compile Frag
 		glCompileShader(fragment);
 																
-		glGetShaderiv(fragment, GL_COMPILE_STATUS, &result);	// Get fragment the log
+		glGetShaderiv(fragment, GL_COMPILE_STATUS, &result);				// Set result to COMPILE_STATUS
+		// Check 2 fragment shader
 		if (result == GL_FALSE)
 		{
-			GLint length;
+			GLint length = 0;
 			glGetShaderiv(fragment, GL_INFO_LOG_LENGTH, &length);
 			std::vector<char> error(length);
 			glGetShaderInfoLog(fragment, length, &length, &error[0]);
 			std::cout << "Failed to compile Fragment Shader" << std::endl << &error[0] << std::endl;
 			glDeleteShader(fragment);
-			return 0;											// Uint!
+			glDeleteShader(vertex);
+			return 0;
 		}
 
-		// Attach hader to our program
-		glAttachShader(program, vertex);			// Initialize them
+		// Attach shader to our program
+		glAttachShader(program, vertex);
 		glAttachShader(program, fragment);
 
-		glLinkProgram(program);						// link them
-		glValidateProgram(program);					// validate them
+		glLinkProgram(program);
 
-		glDeleteShader(vertex);
-		glDeleteShader(fragment);
+		GLint isLinked = 0;
+		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);			// Set result to LINK_STATUS
+		// Check 3 Link to program
+		if (isLinked == GL_FALSE)
+		{
+			GLint length = 0;
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+			std::vector<char> error(length);
+			glGetProgramInfoLog(program, length, &length, &error[0]);
+			std::cout << "Failed to link to program: " << &error[0] << std::endl;
+			
+			glDeleteShader(fragment);
+			glDeleteShader(vertex);
+			return 0;
+
+		}
+		// Successful compile & link
+		glValidateProgram(program);					
+
+		glDetachShader(program, vertex);			// This does not delete the shaders we just compiled. Rather, it removes them from program object store.
+		glDetachShader(program, fragment);
 
 		return program;
 	}
-
-	GLint Shader::getUniformLocation(const GLchar* name)	// Abstract of otherwise OpenGL function
+	// Slight abstract of otherwise OpenGL functions
+	GLint Shader::getUniformLocation(const GLchar* name)	
 	{
 		return glGetUniformLocation(m_ShaderID, name);
 	}
@@ -100,7 +123,6 @@ namespace sparx { namespace graphics {
 	{
 		glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
 	}
-
 
 	void Shader::enable() const
 	{

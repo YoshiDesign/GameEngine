@@ -12,7 +12,7 @@ namespace sparx { namespace maths {
 		vec3();
 		vec3(const float& x, const float& y, const float& z);
 		
-		// These return a reference to current vec3 object lol?
+		// These return a reference to current vec3 object
 		vec3& add(const vec3& other);
 		vec3& subtract(const vec3& other);
 		vec3& multiply(const vec3& other);

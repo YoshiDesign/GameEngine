@@ -16,11 +16,11 @@ namespace sparx { namespace maths {
 			this->y = y;
 		}
 
-		vec2& vec2::add(const vec2& other)
+		vec2& vec2::add(const vec2& other)		// keep it const, dont create copy, this is safe and efficient. 
 		{
 			x += other.x;
 			y += other.y;
-			return *this;
+			return *this;						// *this will be our left hand operand
 		}
 
 		vec2& vec2::subtract(const vec2& other)
@@ -46,42 +46,38 @@ namespace sparx { namespace maths {
 
 		vec2 operator+(vec2 left, const vec2& right)
 		{
-			// left + right
 			return left.add(right);
 		}
 		vec2 operator-(vec2 left, const vec2& right)
 		{
-			// left + right
 			return left.subtract(right);
 		}
 		vec2 operator*(vec2 left, const vec2& right)
 		{
-			// left + right
 			return left.multiply(right);
 		}
 		vec2 operator/(vec2 left, const vec2& right)
 		{
-			// left + right
 			return left.divide(right);
 		}
 
 		// Comparison overloads
 		bool vec2::operator!=(const vec2& other)
 		{
-			return x != other.x || y != other.y;			// Using what we have already oveloaded. No need to write x == other.x && y == other.y
+			return  x != other.x || y != other.y;			// Using what we have already oveloaded.
 		}
 
 		bool vec2::operator==(const vec2& other)
 		{
-			return !(*this != other);
+			return !(*this != other);						// I hope this is safe
 		}
 		
-
+		// Note that the other overloaded operators dont return references; hence a simple return statement
 		vec2& vec2::operator+=(const vec2& other)
 		{
-			// since add already returns "this", we can use 1 simple line
-			return add(other);
+			return add(other);							// 'this' must follow the functiond up the callstack
 		}
+			
 		vec2& vec2::operator-=(const vec2& other)
 		{
 			return subtract(other);

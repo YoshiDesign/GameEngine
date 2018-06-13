@@ -27,13 +27,13 @@ namespace sparx { namespace graphics {
 		}
 		bool Window::init()
 		{
-			if (!glfwInit())
+			if (!glfwInit())		// Initial init
 			{
-				std::cout << "Failed to create GLFW window" << std::endl;
+				std::cout << "Failed to initialize GLFW" << std::endl;
 				return false;
 			}
-
-			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
+			
+			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);		// Returns a pointer
 
 			if (!m_Window)
 			{
@@ -41,11 +41,11 @@ namespace sparx { namespace graphics {
 				return false;
 			}
 
-			// Initialize glfw contexts
+			// Initialize glfw contexts & callbacks
 			glfwMakeContextCurrent(m_Window);
-			glfwSetWindowUserPointer(m_Window, this);				// A pointer pointing to our window.
-																	// We are not responsible for freeing this pointer.
-
+			glfwSetWindowUserPointer(m_Window, this);						// This ties a pointer (m_Window) to our GL window.
+																			// We are not responsible for freeing any returned by OpenGL
+			// (from this context, this function will be called)
 			glfwSetWindowSizeCallback(m_Window, window_resize);				// Set window resize callback
 			glfwSetKeyCallback(m_Window, key_callback);						// Set Key callback
 			glfwSetMouseButtonCallback(m_Window, mouse_button_callback);	// Set Mouse Callback
@@ -96,10 +96,10 @@ namespace sparx { namespace graphics {
 		}
 		bool Window::closed() const
 		{
-			return glfwWindowShouldClose(m_Window) == 1;			// Because its a bool.....raises warning
+			return glfwWindowShouldClose(m_Window) == 1;			// Because its a bool.....raises warning, closes window
 		}
 
-		// Not a Window::method
+		// Not Window::methods // Recall that the WindowUserPointer is our current context and our current window
 		void window_resize(GLFWwindow *window, int width, int height)
 		{
 			glViewport(0, 0, width, height);
@@ -112,7 +112,7 @@ namespace sparx { namespace graphics {
 		}
 		void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 		{
-			Window *win = (Window*)glfwGetWindowUserPointer(window);
+			Window *win = (Window*)glfwGetWindowUserPointer(window);						// Logical
 			win->m_MouseButtons[button] = action != GLFW_RELEASE;							// Map of the window's MousePress buffer
 		}
 		void cursor_position_callback(GLFWwindow *window, double xpos, double ypos)

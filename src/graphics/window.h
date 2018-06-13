@@ -10,13 +10,13 @@ namespace sparx { namespace graphics {
 		{
 
 		private:
-			const char *m_Title;
+			const char* m_Title;
 			int m_Width, m_Height;
-			GLFWwindow *m_Window;
+			GLFWwindow* m_Window;
 			bool m_Closed;
 
-			bool m_Keys[MAX_KEYS];							// Must be static probably ...
-			bool m_MouseButtons[MAX_BUTTONS];				// ...for callbacks
+			bool m_Keys[MAX_KEYS];
+			bool m_MouseButtons[MAX_BUTTONS];
 			double mX, mY;
 
 		public:

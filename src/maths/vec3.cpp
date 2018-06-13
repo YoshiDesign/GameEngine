@@ -52,22 +52,18 @@ namespace sparx { namespace maths {
 
 	vec3 operator+(vec3 left, const vec3& right)
 	{
-		// left + right
 		return left.add(right);
 	}
 	vec3 operator-(vec3 left, const vec3& right)
 	{
-		// left + right
 		return left.subtract(right);
 	}
 	vec3 operator*(vec3 left, const vec3& right)
 	{
-		// left + right
 		return left.multiply(right);
 	}
 	vec3 operator/(vec3 left, const vec3& right)
 	{
-		// left + right
 		return left.divide(right);
 	}
 
@@ -78,7 +74,7 @@ namespace sparx { namespace maths {
 	}
 	bool vec3::operator!=(const vec3& other) 
 	{
-		return !(*this == other);			// Using what we have already oveloaded. No need to write x != other.x || y != other.y
+		return !(*this == other);						// Using what we have already oveloaded.
 	}
 
 	vec3& vec3::operator+=(const vec3& other)

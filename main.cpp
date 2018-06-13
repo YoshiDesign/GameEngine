@@ -38,8 +38,13 @@ int main()
 
 	shader.setUniform2f("light_pos", vec2(4.0f, 1.5f));
 	shader.setUniform4f("color_u", vec4(0.2f, 0.3f, 0.8f, 1.0f));
-
 	
+
+	vec2 a = vec2(1.0f, 2.4f);
+	vec2 b = vec2(1.0f, 2.3f);
+
+	std::cout << (a==b) << std::endl;
+
 	while (!window.closed())
 	{
 		window.clear();

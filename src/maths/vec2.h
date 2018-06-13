@@ -18,7 +18,7 @@ namespace sparx { namespace maths {
 			vec2& multiply(const vec2& other);
 			vec2& divide(const vec2& other);
 
-			// reading from right, hence ref. Or a = x + b would alter x
+			// copying left. Or else a = x + b would alter x
 			friend vec2 operator+(vec2 left, const vec2& right);
 			friend vec2 operator-(vec2 left, const vec2& right);
 			friend vec2 operator*(vec2 left, const vec2& right);

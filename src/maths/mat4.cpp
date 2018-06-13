@@ -22,7 +22,7 @@ namespace sparx { namespace maths {
 
 	mat4 mat4::identity()	// calls above func
 	{
-		return mat4(1.0f);
+		return mat4(1.0f);		// Row echelon form
 	}
 
 	mat4& mat4::multiply(const mat4& other)	// Multiply 2 matrices together. Modifies the current matrix

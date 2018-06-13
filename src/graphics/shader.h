@@ -15,7 +15,7 @@ namespace sparx { namespace graphics {
 		{
 		private:
 			GLuint m_ShaderID;
-			const char *m_VertPath, *m_FragPath;					// helpful for debug
+			const char *m_VertPath, *m_FragPath;					// helpful for debug. GLSL uses C style strings.
 			
 		public:
 			Shader(const char* vertPath, const char* fragPath); // path to vertex shader and fragment shader

@@ -12,7 +12,7 @@ namespace sparx { namespace maths {
 	{
 		union
 		{
-			// 2 ways to acquire mat4 memory locale
+			// 2 ways to interpret mat4 memory locale
 			float elements[4 * 4];
 			vec4 columns[4];
 		};
