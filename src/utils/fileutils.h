@@ -19,7 +19,7 @@ namespace sparx {
 			fclose(file);
 
 			std::string result(data);
-			std::cout << result << std::endl;
+
 			delete[] data;
 			return result;
 		}

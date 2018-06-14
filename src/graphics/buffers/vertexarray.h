@@ -21,7 +21,7 @@ namespace sparx { namespace graphics {
 	{
 	private:
 		GLuint m_ArrayID;
-		std::vector<Buffer*> m_Buffers;
+		std::vector<Buffer*> m_Buffers;		// will need to be managed (deleted)
 
 	public:
 		VertexArray();

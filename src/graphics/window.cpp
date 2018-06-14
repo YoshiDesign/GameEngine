@@ -89,9 +89,12 @@ namespace sparx { namespace graphics {
 		}
 		void Window::update()
 		{
-			glfwPollEvents();
-			glfwGetFramebufferSize(m_Window, &m_Width, &m_Height);	// sets width and height to different vals for resize
 
+			GLenum error = glGetError();
+			if (error != GL_NO_ERROR)
+				std::cout << "OpenGL Error: " << error << std::endl;			// Catch otherwise silent errors from GL Render process
+
+			glfwPollEvents();
 			glfwSwapBuffers(m_Window);
 		}
 		bool Window::closed() const

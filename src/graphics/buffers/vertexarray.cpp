@@ -1,5 +1,12 @@
 #include "vertexarray.h"
 
+/*
+	SEE : glBindVertexArray
+	What is a vertex array?
+	What are our array attributes attributed to?
+*/
+
+
 namespace sparx { namespace graphics {
 
 	VertexArray::VertexArray()
@@ -16,11 +23,11 @@ namespace sparx { namespace graphics {
 	void VertexArray::addBuffer(Buffer *buffer, GLuint index)			// index corresponds w/ shader "layout (location = 0) ... // We need to get this buffer to point to that same location in our shader
 	{
 		bind();
-		buffer->bind();	// being bound to shader index
+		buffer->bind();													// being bound to shader index
 		glEnableVertexAttribArray(index);
-		glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);	// the shaders index. 2nd param is the size in terms of components, not bits or bytes. contains stride & offset (last 2 args)
+		glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);	// corresponds to the shader's location attribute index. 2nd param is the size in terms of components. contains stride & offset (last 2 args)
 
-			buffer->unbind();
+		buffer->unbind();
 		unbind();
 	}
 

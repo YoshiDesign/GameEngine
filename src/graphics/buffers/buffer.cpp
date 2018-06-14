@@ -7,7 +7,7 @@ namespace sparx { namespace graphics {
 	{
 		glGenBuffers(1, &m_BufferID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_BufferID);												// Just an array
-		glBufferData(GL_ARRAY_BUFFER, count * sizeof(GLfloat), data, GL_STATIC_DRAW);			// Size in bytes. Last arg = per usage
+		glBufferData(GL_ARRAY_BUFFER, count * sizeof(GLfloat), data, GL_STATIC_DRAW);			// Size in bytes. Last arg describes usage
 		glBindBuffer(GL_ARRAY_BUFFER, 0);														// Unbind everything
 
 	}
